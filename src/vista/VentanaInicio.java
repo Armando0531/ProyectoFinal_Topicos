@@ -3,9 +3,10 @@ package vista;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 
 
-public class VentanaInicio extends JFrame {
+public class VentanaInicio extends JFrame implements ActionListener {
 
 
     JToolBar toolbar;
@@ -29,6 +30,7 @@ public class VentanaInicio extends JFrame {
 
         toolbar = new JToolBar();
         btnCerrarSesion = new JButton("Cerrar sesión");
+        btnCerrarSesion.addActionListener(this);
         toolbar.add(btnCerrarSesion);
         add(toolbar, BorderLayout.NORTH);
 
@@ -37,12 +39,16 @@ public class VentanaInicio extends JFrame {
         menuDonadores = new JMenu("Donadores");
 
         menuAgregarDonador = new JMenuItem("Agregar Donador");
+        menuAgregarDonador.addActionListener(this);
 
         menuEliminarDonador = new JMenuItem("Eliminar Donador");
+        menuEliminarDonador.addActionListener(this);
 
         menuEditarDonador = new JMenuItem("Editar Donador");
+        menuEditarDonador.addActionListener(this);
 
         menuConsultarDonador = new JMenuItem("Consultar Donador");
+        menuConsultarDonador.addActionListener(this);
 
         menuDonadores.add(menuAgregarDonador);
         menuDonadores.add(menuEliminarDonador);
@@ -52,12 +58,16 @@ public class VentanaInicio extends JFrame {
         menuDonaciones = new JMenu("Donaciones");
 
         menuAgregarDonacion = new JMenuItem("Agregar Donacion");
+        menuAgregarDonacion.addActionListener(this);
 
         menuEliminarDonacion = new JMenuItem("Eliminar Donacion");
+        menuEliminarDonacion.addActionListener(this);
 
         menuEditarDonacion = new JMenuItem("Editar Donacion");
+        menuEditarDonacion.addActionListener(this);
 
         menuConsultarDonacion = new JMenuItem("Consultar Donacion");
+        menuConsultarDonacion.addActionListener(this);
 
         menuDonaciones.add(menuAgregarDonacion);
         menuDonaciones.add(menuEliminarDonacion);
