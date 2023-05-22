@@ -1,12 +1,13 @@
 package vista;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.Toolkit;
-import java.awt.event.ActionListener;
 
 
-public class VentanaInicio extends JFrame implements ActionListener {
+public class VentanaInicio extends JFrame implements ActionListener{
 
 
     JToolBar toolbar;
@@ -16,6 +17,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
     JMenuItem menuAgregarDonador, menuEliminarDonador, menuEditarDonador, menuConsultarDonador;
     JMenuItem menuAgregarDonacion, menuEliminarDonacion, menuEditarDonacion, menuConsultarDonacion;
     JDesktopPane dp = new JDesktopPane();
+    private JInternalFrame ventanaActual;
 
     public VentanaInicio() {
         getContentPane().setLayout(new BorderLayout());
@@ -81,4 +83,73 @@ public class VentanaInicio extends JFrame implements ActionListener {
 
         setLocationRelativeTo(null);
     }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (ventanaActual != null) {
+            ventanaActual.setVisible(false);
+            dp.remove(ventanaActual);
+        }
+
+        if (e.getSource() == menuAgregarDonador) {//GUI completa --MYSQL
+            VentanaAgregarDonador ventanaAltas = new VentanaAgregarDonador();
+            ventanaActual = ventanaAltas;
+            dp.add(ventanaAltas);
+            ventanaAltas.setVisible(true);
+            add(dp);
+        } else if(e.getSource()==menuEliminarDonador) {
+            VentanaEliminarDonador ventanaBajasDonador =new VentanaEliminarDonador();
+            ventanaActual = ventanaBajasDonador;
+            dp.add(ventanaBajasDonador);
+            ventanaBajasDonador.setVisible(true);
+            add(dp);
+        }else if(e.getSource()==menuEditarDonador) {
+            VentanaEditarDonador ventanaEdicionDonador = new VentanaEditarDonador();
+            ventanaActual = ventanaEdicionDonador;
+            dp.add(ventanaEdicionDonador);
+            ventanaEdicionDonador.setVisible(true);
+            add(dp);
+        }else if(e.getSource()==menuConsultarDonador) {
+            VentanaConsultarDonador ventanaConsulDonador = new VentanaConsultarDonador();
+            ventanaActual = ventanaConsulDonador;
+            dp.add(ventanaConsulDonador);
+            ventanaConsulDonador.setVisible(true);
+            add(dp);
+        }else if(e.getSource()== menuAgregarDonacion) {
+            VentanaAgregarDonacion ventanaAltasDonadociones = new VentanaAgregarDonacion();
+            ventanaActual = ventanaAltasDonadociones;
+            dp.add(ventanaAltasDonadociones);
+            ventanaAltasDonadociones.setVisible(true);
+            add(dp);
+        }else if(e.getSource()==menuEliminarDonacion) {
+            VentanaEliminarDonacion ventanaBajasDonaciones =new VentanaEliminarDonacion();
+            ventanaActual = ventanaBajasDonaciones;
+            dp.add(ventanaBajasDonaciones);
+            ventanaBajasDonaciones.setVisible(true);
+            add(dp);
+        }else if(e.getSource()==menuEditarDonacion) {
+            VentanaEditarDonacion ventanaEdicionDonaciones = new VentanaEditarDonacion();
+            ventanaActual = ventanaEdicionDonaciones;
+            dp.add(ventanaEdicionDonaciones);
+            ventanaEdicionDonaciones.setVisible(true);
+            add(dp);
+        }else if(e.getSource()==menuConsultarDonacion) {
+            VentanaConsultarDonacion ventanaConsulDonaciones = new VentanaConsultarDonacion();
+            ventanaActual = ventanaConsulDonaciones;
+            dp.add(ventanaConsulDonaciones);
+            ventanaConsulDonaciones.setVisible(true);
+            add(dp);
+        }else if (e.getSource() == btnCerrarSesion) {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    VentanaLogin ventanaLogin = new VentanaLogin();
+                    ventanaLogin.setVisible(true);
+                    dispose(); // Cierra la ventana actual
+                }
+            });
+        }
+    }
+
 }
+
