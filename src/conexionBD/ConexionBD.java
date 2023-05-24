@@ -42,4 +42,16 @@ public class ConexionBD {
             e.printStackTrace();
         }
     }
+
+    public static  ResultSet ConsultarRegistro(String consulta){
+
+        try {
+            pstm = conexion.prepareStatement(consulta);
+            return pstm.executeQuery();
+
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+        return null;
+    }
 }
