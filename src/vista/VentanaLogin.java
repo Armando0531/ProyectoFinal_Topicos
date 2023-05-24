@@ -1,8 +1,18 @@
 package vista;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.util.ArrayList;
 
+import conexionBD.ConexionBD;
+import modelo.Usuario;
+import controlador.UsuarioDAO;
 
 public class VentanaLogin extends JFrame {
     JButton btnIngresar;
@@ -67,6 +77,62 @@ public class VentanaLogin extends JFrame {
         btnIngresar.setFont(new Font("Arial Black", Font.PLAIN, 14));
         btnIngresar.setBounds(111, 453, 119, 29);
         contentPane.add(btnIngresar);
+
+        cajaUsuario.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isLetterOrDigit(c) && c != KeyEvent.VK_BACK_SPACE) {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {}
+
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+
+        cajaContrasena.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isLetterOrDigit(c) && c != KeyEvent.VK_BACK_SPACE) {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {}
+
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+
+        btnIngresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Connection a = ConexionBD.getConexion();
+                UsuarioDAO uDAO = new UsuarioDAO();
+
+                ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+                listaUsuarios = uDAO.buscar(cajaUsuario.getText(), cajaContrasena.getText());
+
+                if (listaUsuarios != null) {
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            new VentanaInicio();
+                            setVisible(false);
+                        }
+                    });
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario inexistente o contraseña incorrecta");
+                }
+            }
+        });
+
 
 
     }
