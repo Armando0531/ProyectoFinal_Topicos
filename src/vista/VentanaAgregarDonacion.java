@@ -200,6 +200,16 @@ public class VentanaAgregarDonacion extends JInternalFrame implements ActionList
 
 
     }
+
+    public void restablecer(Component... ComonentesGraficos) {
+        for (Component Component : ComonentesGraficos) {
+            if (Component instanceof JComboBox) {
+                ((JComboBox<?>) Component).setSelectedIndex(0);
+            } else if (Component instanceof JTextField) {
+                ((JTextField) Component).setText("");
+            }
+        }
+    }
     public boolean validarCajasVacias() {
         if (cajaIdEvento.getText().isEmpty()) {
             return false;
