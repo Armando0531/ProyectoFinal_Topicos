@@ -1,5 +1,7 @@
 package conexionBD;
 
+import modelo.Donacion;
+
 import java.sql.*;
 
 public class ConexionBD {
@@ -53,5 +55,33 @@ public class ConexionBD {
             System.out.println(ex.toString());
         }
         return null;
+    }
+    public static boolean AgregarDonacion(Donacion donacion) {
+
+        try {
+
+            pstm = conexion.prepareStatement("INSERT INTO Donativo VALUES (null,?,?,?,?,?,?,?,?,?,?)");
+
+            pstm.setInt(1, donacion.getDonanteId());
+            pstm.setInt(2, donacion.getEventoId());
+            pstm.setDouble(3,donacion.getCantidadGarantizada());
+            pstm.setDouble(4,donacion.getCantidadEnviada());
+            pstm.setString(5,donacion.getFechaGarantia());
+            pstm.setInt(6, donacion.getNumeroPagos());
+            pstm.setString(7,donacion.getTarjetaCredito());
+            pstm.setString(8,donacion.getCorporacionEmisora());
+            pstm.setString(9,donacion.getDireccionCorporacion());
+            pstm.setString(10,donacion.getNombreConyuge());
+
+            pstm.executeUpdate();
+
+            System.out.println(pstm);
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return false;
     }
 }
