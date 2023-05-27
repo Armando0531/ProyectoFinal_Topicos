@@ -196,7 +196,143 @@ public class VentanaAgregarDonacion extends JInternalFrame implements ActionList
         btnAgregar.setIcon(new ImageIcon("./imagenes/Agregar_usuario.png"));
         btnAgregar.addActionListener(this);
 
+        cajaCantidadEnviada.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (!Character.isDigit(car) && car != '.' && car != KeyEvent.VK_BACK_SPACE) {
+                    e.consume();
+                }
+            }
+        });
 
+        cajaCantidadGarantizada.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (!Character.isDigit(car) && car != '.' && car != KeyEvent.VK_BACK_SPACE) {
+                    e.consume();
+                }
+            }
+        });
+
+        cajaNomCorporacion.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (Character.isLetter(car) || Character.isSpaceChar(car)) {
+                } else {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
+        cajaNomConyuge.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (Character.isLetter(car) || Character.isSpaceChar(car)) {
+                } else {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
+        cajaIdEvento.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (Character.isDigit(car)) {
+                    // Permitir solo números enteros
+                } else {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
+        cajaDonante.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (Character.isDigit(car)) {
+                    // Permitir solo números enteros
+                } else {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
+        cajaNumPagos.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (Character.isDigit(car)) {
+                    // Permitir solo números enteros
+                } else {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
+        cajaNumTarjeta.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (Character.isDigit(car)) {
+                    // Permitir solo números enteros
+                } else {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
 
 
     }
