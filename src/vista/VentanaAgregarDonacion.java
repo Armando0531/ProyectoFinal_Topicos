@@ -337,6 +337,52 @@ public class VentanaAgregarDonacion extends JInternalFrame implements ActionList
 
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnSalir) {
+            setVisible(false);
+        } else if (e.getSource() == btnRestablecer) {
+            restablecer(cajaDonante,comboDia,comboMes,comboAnio, cajaIdEvento, cajaCantidadGarantizada, cajaCantidadEnviada,
+                    cajaFecha, cajaNumPagos, cajaNumTarjeta, cajaNomCorporacion, cajaDireccionCorp, cajaNomConyuge);
+        } else if (e.getSource() == btnAgregar) {
+            if (validarCajasVacias()) {
+                String anioSeleccionado = (String) comboAnio.getSelectedItem();
+                String mesSeleccionado = (String) comboMes.getSelectedItem();
+                String diaSeleccionado = (String) comboDia.getSelectedItem();
+
+                // Concatenar los valores en un formato de tipo date (YYYY-MM-DD)
+                String fechaGarantia = anioSeleccionado + "-" + mesSeleccionado + "-" + diaSeleccionado;
+
+                Donacion d = new Donacion();
+
+                d.setDonanteId(Integer.parseInt(cajaDonante.getText()));
+                d.setEventoId(Integer.parseInt(cajaIdEvento.getText()));
+                d.setCantidadGarantizada(Double.parseDouble(cajaCantidadGarantizada.getText()));
+                d.setCantidadEnviada(Double.parseDouble(cajaCantidadEnviada.getText()));
+                d.setFechaGarantia(fechaGarantia);
+                d.setNumeroPagos(Integer.parseInt(cajaNumPagos.getText()));
+                d.setTarjetaCredito(cajaNumTarjeta.getText());
+                d.setCorporacionEmisora(cajaNomCorporacion.getText());
+                d.setDireccionCorporacion(cajaDireccionCorp.getText());
+                d.setNombreConyuge(cajaNomConyuge.getText());
+
+                System.out.println(d);
+                if (dO.insertarRegistro(d)) {
+                    JOptionPane.showMessageDialog(null, "Se agregó la donacion correctamente");
+                    restablecer(comboAnio,comboDia,comboMes,cajaDonante, cajaIdEvento, cajaCantidadGarantizada,
+                            cajaCantidadEnviada, cajaFecha, cajaNumPagos, cajaNumTarjeta, cajaNomCorporacion,
+                            cajaDireccionCorp, cajaNomConyuge);
+                } else {
+                    JOptionPane.showMessageDialog(null, "NO SE AGREGÓ LA DONACIÓN");
+                }
+
+            }else {
+                JOptionPane.showMessageDialog(null, "Debes de llenar los datos nesesarios!");
+            }
+
+        }
+    }
+
     public void restablecer(Component... ComonentesGraficos) {
         for (Component Component : ComonentesGraficos) {
             if (Component instanceof JComboBox) {
