@@ -136,6 +136,17 @@ public class VentanaAgregarDonador extends JInternalFrame implements ActionListe
 
     }
 
-
+    public boolean validarCajasVacias() {
+        if (cajaUsuario.getText().isEmpty()) {
+            return false;
+        } else if (cajaDireccion.getText().isEmpty()) {
+            return false;
+        } else if (categoria.getSelectedItem().toString().isEmpty()) {
+            return false;
+        } else if (metodoPago.getSelectedItem().toString().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
 
 }
