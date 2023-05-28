@@ -1,10 +1,9 @@
 package vista;
 
+import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -147,6 +146,16 @@ public class VentanaAgregarDonador extends JInternalFrame implements ActionListe
             return false;
         }
         return true;
+    }
+
+    public void restablecer(Component... ComonentesGraficos) {
+        for (Component Component : ComonentesGraficos) {
+            if (Component instanceof JComboBox) {
+                ((JComboBox<?>) Component).setSelectedIndex(0);
+            } else if (Component instanceof JTextField) {
+                ((JTextField) Component).setText("");
+            }
+        }
     }
 
 }
