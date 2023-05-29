@@ -1,19 +1,14 @@
 package vista;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.*;
 
 import controlador.DonadorDAO;
+import modelo.Donador;
 
 
 public class VentanaAgregarDonador extends JInternalFrame implements ActionListener{
@@ -192,6 +187,46 @@ public class VentanaAgregarDonador extends JInternalFrame implements ActionListe
 
     }
 
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnRestablecer) {
+            restablecer(cajaUsuario, cajaDireccion, cajaTelefono, cajaAnioGraduacion, metodoPago,categoria);
+        } else if (e.getSource() == btnSalir) {
+            setVisible(false);
+        } else if (e.getSource() == btnAgregar) {
+            if (validarCajasVacias()) {
+                Donador u = new Donador();
+                u.setNombre(cajaUsuario.getText());
+                u.setDireccion(cajaDireccion.getText());
+
+                String telefono = cajaTelefono.getText();
+                if (telefono.isEmpty()){
+                    telefono = null;
+                }
+                u.setTelefono(telefono);
+
+                u.setCategoria(categoria.getSelectedItem().toString());
+
+                String anioGraduacion = cajaAnioGraduacion.getText();
+                if (anioGraduacion.isEmpty()) {
+                    anioGraduacion = null;
+                }
+                u.setAnioGraduacion(anioGraduacion);
+
+                u.setMetodoPago(metodoPago.getSelectedItem().toString());
+
+
+                if (dao.insertarDonador(u)) {
+                    JOptionPane.showMessageDialog(null, "Se agregó el Donador correctamente");
+                    restablecer(cajaUsuario, cajaDireccion, cajaTelefono, cajaAnioGraduacion, metodoPago, categoria);
+                } else {
+                    JOptionPane.showMessageDialog(null, "NO SE AGREGÓ EL DONADOR");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Debes de llenar todos los datos!");
+            }
+        }
+    }
     public boolean validarCajasVacias() {
         if (cajaUsuario.getText().isEmpty()) {
             return false;
