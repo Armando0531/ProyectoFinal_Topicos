@@ -2,6 +2,8 @@ package vista;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
@@ -132,6 +134,61 @@ public class VentanaAgregarDonador extends JInternalFrame implements ActionListe
         btnAgregar.setIcon(new ImageIcon("./imagenes/Agregar_usuario.png"));
         btnAgregar.addActionListener(this);
 
+        cajaUsuario.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (Character.isLetter(car) || Character.isSpaceChar(car)) {
+                } else {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
+        cajaTelefono.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (Character.isDigit(car)) {
+                    // Permitir solo números enteros
+                } else {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+        cajaAnioGraduacion.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (!Character.isDigit(car) || cajaAnioGraduacion.getText().length() >= 4) {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
 
     }
 
