@@ -1,6 +1,7 @@
 package conexionBD;
 
 import modelo.Donacion;
+import modelo.Donador;
 
 import java.sql.*;
 
@@ -55,6 +56,27 @@ public class ConexionBD {
             System.out.println(ex.toString());
         }
         return null;
+    }
+
+    public static boolean AgregarRegistro(Donador donador) {
+        try {
+
+            pstm = conexion.prepareStatement("INSERT INTO Donador VALUES(null,?,?,?,?,?,?)");
+
+            pstm.setString(1,donador.getNombre());
+            pstm.setString(2,donador.getDireccion());
+            pstm.setString(3,donador.getTelefono());
+            pstm.setString(4,donador.getCategoria());
+            pstm.setString(5,donador.getAnioGraduacion());
+            pstm.setString(6,donador.getMetodoPago());
+
+            pstm.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
     public static boolean AgregarDonacion(Donacion donacion) {
 

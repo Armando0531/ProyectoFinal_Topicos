@@ -2,12 +2,9 @@ package controlador;
 
 import conexionBD.ConexionBD;
 import modelo.Donador;
-import vista.VentanaEliminarDonador;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
-public class DonadorDAO implements Runnable {
+public class DonadorDAO  {
     ConexionBD conexion;
     private int filtro;
 
