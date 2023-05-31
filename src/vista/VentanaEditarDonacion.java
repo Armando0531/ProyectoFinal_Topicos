@@ -175,7 +175,188 @@ public class VentanaEditarDonacion extends JInternalFrame implements ActionListe
         getContentPane().add(btnBuscar);
         btnBuscar.addActionListener(this);
 
+        cajaIdDonativo.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (Character.isDigit(car)) {
+                    // Permitir solo números enteros
+                } else {
+                    e.consume();
+                }
+            }
 
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
+        cajaNumTarjeta.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (Character.isDigit(car)) {
+                    // Permitir solo números enteros
+                } else {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
+        cajaCantidadEnviada.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (!Character.isDigit(car) && car != '.' && car != KeyEvent.VK_BACK_SPACE) {
+                    e.consume();
+                }
+            }
+        });
+
+        cajaCantidadGarantizada.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (!Character.isDigit(car) && car != '.' && car != KeyEvent.VK_BACK_SPACE) {
+                    e.consume();
+                }
+            }
+        });
+
+        cajaNomCorporacion.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (Character.isLetter(car) || Character.isSpaceChar(car)) {
+                } else {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
+        cajaNomConyuge.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (Character.isLetter(car) || Character.isSpaceChar(car)) {
+                } else {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
+        cajaIdEvento.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (Character.isDigit(car)) {
+                    // Permitir solo números enteros
+                } else {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
+        cajaDonante.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (Character.isDigit(car)) {
+                    // Permitir solo números enteros
+                } else {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
+        cajaNumPagos.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                if (Character.isDigit(car)) {
+                    // Permitir solo números enteros
+                } else {
+                    e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
+        cajaFecha.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char car = e.getKeyChar();
+                String text = cajaFecha.getText();
+
+                // Permitir solo dígitos, guión y tecla de retroceso
+                if (!Character.isDigit(car) && car != '-' && car != KeyEvent.VK_BACK_SPACE) {
+                    e.consume();
+                    return;
+                }
+
+                // Verificar longitud máxima de cada parte de la fecha
+                if (text.length() >= 10 && car != KeyEvent.VK_BACK_SPACE) {
+                    e.consume();
+                    return;
+                }
+
+                // Verificar formato "yyyy-mm-dd"
+                if (car != KeyEvent.VK_BACK_SPACE && (text.length() == 4 || text.length() == 7)) {
+                    cajaFecha.setText(text + "-");
+                }
+            }
+        });
 
 
     }
