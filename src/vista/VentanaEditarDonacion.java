@@ -1,6 +1,9 @@
 package vista;
 
 
+import controlador.DonacionDAO;
+import modelo.Donacion;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -359,6 +362,87 @@ public class VentanaEditarDonacion extends JInternalFrame implements ActionListe
         });
 
 
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        DonacionDAO dN = new DonacionDAO();
+        if (e.getSource() == btnBuscar && !cajaIdDonativo.getText().isEmpty()) {
+            dN.setFiltro(Integer.parseInt(cajaIdDonativo.getText()));
+            Donacion donacion = dN.buscar(Integer.parseInt(cajaIdDonativo.getText()));
+            if(donacion!=null) {
+                cajaDonante.setText(String.valueOf(donacion.getDonanteId()));
+                cajaIdEvento.setText(String.valueOf(donacion.getEventoId()));
+                cajaCantidadGarantizada.setText(String.valueOf(donacion.getCantidadGarantizada()));
+                cajaCantidadEnviada.setText(String.valueOf(donacion.getCantidadEnviada()));
+                cajaFecha.setText(donacion.getFechaGarantia());
+                cajaNumPagos.setText(String.valueOf(donacion.getNumeroPagos()));
+                cajaNumTarjeta.setText(donacion.getTarjetaCredito());
+                cajaNomCorporacion.setText(donacion.getCorporacionEmisora());
+                cajaDireccionCorp.setText(donacion.getDireccionCorporacion());
+                cajaNomConyuge.setText(donacion.getNombreConyuge());
+                btnEditar.setEnabled(true);
+
+                cajaDonante.setEnabled(true);
+                cajaIdEvento.setEnabled(true);
+                cajaCantidadGarantizada.setEnabled(true);
+                cajaCantidadEnviada.setEnabled(true);
+                cajaFecha.setEnabled(true);
+                cajaNumPagos.setEnabled(true);
+                cajaNumTarjeta.setEnabled(true);
+                cajaNomCorporacion.setEnabled(true);
+                cajaDireccionCorp.setEnabled(true);
+                cajaNomConyuge.setEnabled(true);
+
+            }else {
+                JOptionPane.showMessageDialog(null,"No se encontro el Donador");
+            }
+
+        }else if (e.getSource() == btnRestablecer) {
+            restablecer(cajaIdDonativo,cajaDonante, cajaIdEvento, cajaCantidadGarantizada, cajaCantidadEnviada,
+                    cajaFecha, cajaNumPagos, cajaNumTarjeta, cajaNomCorporacion, cajaDireccionCorp, cajaNomConyuge);
+            btnRestablecer.setEnabled(false);
+        } else if (e.getSource() == btnSalir) {
+            setVisible(false);
+        } else if (e.getSource()==btnEditar) {
+            if (validarCajasVacias()) {
+                Donacion donacion1 = new Donacion();
+
+                donacion1.setId(Integer.parseInt(cajaIdDonativo.getText()));
+                donacion1.setDonanteId(Integer.parseInt(cajaDonante.getText()));
+                donacion1.setEventoId(Integer.parseInt(cajaIdEvento.getText()));
+                donacion1.setCantidadGarantizada(Double.parseDouble(cajaCantidadGarantizada.getText()));
+                donacion1.setCantidadEnviada(Double.parseDouble(cajaCantidadEnviada.getText()));
+                donacion1.setFechaGarantia(cajaFecha.getText());
+                donacion1.setNumeroPagos(Integer.parseInt(cajaNumPagos.getText()));
+                donacion1.setTarjetaCredito(cajaNumTarjeta.getText());
+                donacion1.setCorporacionEmisora(cajaNomCorporacion.getText());
+                donacion1.setDireccionCorporacion(cajaDireccionCorp.getText());
+                donacion1.setNombreConyuge(cajaNomConyuge.getText());
+
+                boolean bandera = dN.modificarDonadocion(donacion1);
+                if (bandera) {
+                    JOptionPane.showMessageDialog(null, "Se modifico correctamente la donacion");
+                    restablecer(cajaIdDonativo, cajaDonante, cajaIdEvento, cajaCantidadGarantizada, cajaCantidadEnviada,
+                            cajaFecha, cajaNumPagos, cajaNumTarjeta, cajaNomCorporacion, cajaDireccionCorp, cajaNomConyuge);
+                    cajaDonante.setEnabled(false);
+                    cajaIdEvento.setEnabled(false);
+                    cajaCantidadGarantizada.setEnabled(false);
+                    cajaCantidadEnviada.setEnabled(false);
+                    cajaFecha.setEnabled(false);
+                    cajaNumPagos.setEnabled(false);
+                    cajaNumTarjeta.setEnabled(false);
+                    cajaNomCorporacion.setEnabled(false);
+                    cajaDireccionCorp.setEnabled(false);
+                    cajaNomConyuge.setEnabled(false);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "NO se modifico La donacion");
+                }
+                btnEditar.setEnabled(false);
+            }else {
+                JOptionPane.showMessageDialog(null, "NO SE PUEDE DEJAR ALGUNOS CAMPOS VACIOS");
+            }
+        }
     }
     public boolean validarCajasVacias() {
         if (cajaIdEvento.getText().isEmpty()) {
