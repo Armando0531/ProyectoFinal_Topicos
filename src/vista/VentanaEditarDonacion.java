@@ -360,5 +360,29 @@ public class VentanaEditarDonacion extends JInternalFrame implements ActionListe
 
 
     }
+    public boolean validarCajasVacias() {
+        if (cajaIdEvento.getText().isEmpty()) {
+            return false;
+        } else if (cajaDonante.getText().isEmpty()) {
+            return false;
+        } else if (cajaCantidadGarantizada.getText().isEmpty()) {
+            return false;
+        } else if (cajaCantidadEnviada.getText().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    public void restablecer(Component...ComonentesGraficos){
+
+        for (Component Component : ComonentesGraficos) {
+            if(Component instanceof JComboBox) {
+                ((JComboBox<?>)Component).setSelectedIndex(0);
+            }else if(Component instanceof JTextField) {
+                ((JTextField)Component).setText("");
+            }
+        }
+
+    }
 
 }
