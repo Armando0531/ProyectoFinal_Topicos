@@ -199,6 +199,85 @@ public class VentanaEliminarDonacion extends JInternalFrame implements ActionLis
         });
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnBuscar) {
+            DonacionDAO dO = new DonacionDAO();
+            if(!cajaIdDonativo.getText().isEmpty()) {
+                dO.setFiltro(Integer.parseInt(cajaIdDonativo.getText()));
+                Thread hilo=new Thread(dO);
+                hilo.start();
+                Donacion donacion = dO.buscar(Integer.parseInt(cajaIdDonativo.getText()));
+                if(bandera==1 || donacion!=null) {
+                    bandera=0;
+                    donacion = dO.buscar(Integer.parseInt(cajaIdDonativo.getText()));
 
+                    cajaDonante.setText(String.valueOf(donacion.getDonanteId()));
+                    cajaEvento.setText(String.valueOf(donacion.getEventoId()));
+                    cajaCantidadGarantizada.setText(String.valueOf(donacion.getCantidadGarantizada()));
+                    cajaCantidadEnviada.setText(String.valueOf(donacion.getCantidadEnviada()));
+                    cajaFecha.setText(donacion.getFechaGarantia());
+                    cajaNumPagos.setText(String.valueOf(donacion.getNumeroPagos()));
+                    cajaNumTarjeta.setText(donacion.getTarjetaCredito());
+                    cajaNomCorporacion.setText(donacion.getCorporacionEmisora());
+                    cajaDireccionCorp.setText(donacion.getDireccionCorporacion());
+                    cajaNomConyuge.setText(donacion.getNombreConyuge());
+                    btnEliminar.setEnabled(true);
 
+                    cajaDonante.setEnabled(false);
+                    cajaEvento.setEnabled(false);
+                    cajaCantidadGarantizada.setEnabled(false);
+                    cajaCantidadEnviada.setEnabled(false);
+                    cajaFecha.setEnabled(false);
+                    cajaNumPagos.setEnabled(false);
+                    cajaNumTarjeta.setEnabled(false);
+                    cajaNomCorporacion.setEnabled(false);
+                    cajaDireccionCorp.setEnabled(false);
+                    cajaNomConyuge.setEnabled(false);
+                }else {
+                    JOptionPane.showMessageDialog(null,"No se encontro el Donador");
+                }
+            }
+        } else if (e.getSource() == btnEliminar) {
+            if(JOptionPane.showConfirmDialog(null, "Si eliminas unA DONACION tambien se eliminaran sus referencias"
+                    + " ten encuenta que esta accion no se puede revertir ¿Deseas continuar?")==0) {
+                DonacionDAO dO =new DonacionDAO();
+                if(dO.eliminarDonacion(cajaIdDonativo.getText())) {
+                    boolean bandera=dO.eliminarDonacion(cajaIdDonativo.getText());
+                    if(bandera) {
+                        JOptionPane.showMessageDialog(null,"Se elimino el registro correctamente");
+                        restablecer(cajaIdDonativo,cajaDonante, cajaEvento, cajaCantidadGarantizada, cajaCantidadEnviada, cajaFecha, cajaNumPagos, cajaNumTarjeta, cajaNomCorporacion, cajaDireccionCorp, cajaNomConyuge);
+                    }else {
+                        JOptionPane.showMessageDialog(null,"No se pudo eliminar");
+                        restablecer(cajaDonante, cajaEvento, cajaCantidadGarantizada, cajaCantidadEnviada, cajaFecha, cajaNumPagos, cajaNumTarjeta, cajaNomCorporacion, cajaDireccionCorp, cajaNomConyuge);
+                    }
+                }
+            }else {
+                JOptionPane.showConfirmDialog(null,"Accion cancelada");
+                btnEliminar.setEnabled(false);
+                restablecer(cajaDonante, cajaEvento, cajaCantidadGarantizada, cajaCantidadEnviada, cajaFecha, cajaNumPagos,
+                        cajaNumTarjeta, cajaNomCorporacion, cajaDireccionCorp, cajaNomConyuge);
+            }
+
+            btnEliminar.setEnabled(false);
+        } else if (e.getSource() == btnRestablecer) {
+            restablecer(cajaIdDonativo,cajaDonante, cajaEvento, cajaCantidadGarantizada, cajaCantidadEnviada, cajaFecha,
+                    cajaNumPagos, cajaNumTarjeta, cajaNomCorporacion, cajaDireccionCorp, cajaNomConyuge);
+        } else if (e.getSource() == btnSalir) {
+            setVisible(false);
+        }
+    }
+
+    public void restablecer(Component...ComonentesGraficos){
+
+        for (Component Component : ComonentesGraficos) {
+            if(Component instanceof JComboBox) {
+                ((JComboBox<?>)Component).setSelectedIndex(0);
+            }else if(Component instanceof JTextField) {
+                ((JTextField)Component).setText("");
+            }
+        }
+        btnEliminar.setEnabled(false);
+
+    }
 }
