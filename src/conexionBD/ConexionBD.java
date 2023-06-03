@@ -106,4 +106,32 @@ public class ConexionBD {
         }
         return false;
     }
+    public static boolean ActualizarRegistroDonacion(Donacion donacion){
+
+        try {
+            pstm = conexion.prepareStatement("UPDATE Donativo SET Donante_ID=? , Evento_ID=?, " +
+                    "CantidadGarantizada=?, CantidadEnviada=?, FechaGarantia=?, NumeroPagos=?, TarjetaCredito=?, " +
+                    "CorporacionEmisora=?, DireccionCorporacion=?, NombreConyugue=? WHERE ID=?");
+
+            pstm.setInt(1, donacion.getDonanteId());
+            pstm.setInt(2, donacion.getEventoId());
+            pstm.setDouble(3,donacion.getCantidadGarantizada());
+            pstm.setDouble(4,donacion.getCantidadEnviada());
+            pstm.setString(5,donacion.getFechaGarantia());
+            pstm.setInt(6, donacion.getNumeroPagos());
+            pstm.setString(7,donacion.getTarjetaCredito());
+            pstm.setString(8,donacion.getCorporacionEmisora());
+            pstm.setString(9,donacion.getDireccionCorporacion());
+            pstm.setString(10,donacion.getNombreConyuge());
+            pstm.setInt(11, donacion.getId());
+
+            pstm.executeUpdate();
+
+            return true;
+
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+        return false;
+    }
 }
