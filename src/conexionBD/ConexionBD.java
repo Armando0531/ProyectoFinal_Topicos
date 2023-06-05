@@ -106,6 +106,18 @@ public class ConexionBD {
         }
         return false;
     }
+
+    public static boolean EliminarRegistro(String instruccion){
+        try {
+            String consulta = instruccion;
+            pstm = conexion.prepareStatement(consulta);
+            pstm.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+        return false;
+    }
     public static boolean ActualizarRegistroDonacion(Donacion donacion){
 
         try {
