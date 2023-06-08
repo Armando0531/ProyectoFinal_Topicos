@@ -118,6 +118,30 @@ public class ConexionBD {
         }
         return false;
     }
+
+    public static boolean ActualizarRegistro(Donador donador){
+
+        try {
+            pstm = conexion.prepareStatement("UPDATE Donador SET Nombre=?, Direccion=?, Telefono=?, " +
+                    "Categoria=?, AnioGraduacion=?, MetodoPago=? WHERE ID=?");
+
+            pstm.setString(1, donador.getNombre());
+            pstm.setString(2, donador.getDireccion());
+            pstm.setString(3, donador.getTelefono());
+            pstm.setString(4, donador.getCategoria());
+            pstm.setString(5, donador.getAnioGraduacion());
+            pstm.setString(6, donador.getMetodoPago());
+            pstm.setInt(7, donador.getId());
+
+            pstm.executeUpdate();
+
+            return true;
+
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+        return false;
+    }
     public static boolean ActualizarRegistroDonacion(Donacion donacion){
 
         try {
