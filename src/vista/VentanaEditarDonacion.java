@@ -394,7 +394,7 @@ public class VentanaEditarDonacion extends JInternalFrame implements ActionListe
                 cajaNomConyuge.setEnabled(true);
 
             }else {
-                JOptionPane.showMessageDialog(null,"No se encontro el Donador");
+                JOptionPane.showMessageDialog(null,"No se encontro el Donativo");
             }
 
         }else if (e.getSource() == btnRestablecer) {

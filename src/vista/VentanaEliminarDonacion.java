@@ -239,7 +239,7 @@ public class VentanaEliminarDonacion extends JInternalFrame implements ActionLis
                 }
             }
         } else if (e.getSource() == btnEliminar) {
-            if(JOptionPane.showConfirmDialog(null, "Si eliminas unA DONACION tambien se eliminaran sus referencias"
+            if(JOptionPane.showConfirmDialog(null, "Si eliminas una DONACION tambien se eliminaran sus referencias"
                     + " ten encuenta que esta accion no se puede revertir ¿Deseas continuar?")==0) {
                 DonacionDAO dO =new DonacionDAO();
                 if(dO.eliminarDonacion(cajaIdDonativo.getText())) {

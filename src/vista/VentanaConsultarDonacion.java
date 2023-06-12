@@ -38,7 +38,7 @@ public class VentanaConsultarDonacion extends JInternalFrame implements ActionLi
         getContentPane().add(lblLogoU);
 
         busqueda = new JComboBox<>();
-        busqueda.setModel(new DefaultComboBoxModel<>(new String[] {"ID. Donativo", "ID. Donacion", "ID. Evento",
+        busqueda.setModel(new DefaultComboBoxModel<>(new String[] {"ID. Donativo", "ID. Donante", "ID. Evento",
                 "Cantidad Garantizada", "Cantidad Enviada","Fecha", "Numero de pagos", "Tarjeta de credito",
                 "Corporacion", "Direccion corporacion", "Nombre conyuge"}));
         busqueda.setBounds(198, 105, 200, 22);
@@ -49,7 +49,7 @@ public class VentanaConsultarDonacion extends JInternalFrame implements ActionLi
         btnRestablecer.setForeground(new Color(255, 255, 255));
         btnRestablecer.setBackground(new Color(238, 47, 36));
         btnRestablecer.setFont(new Font("Arial", Font.PLAIN, 11));
-        btnRestablecer.setBounds(389, 443, 105, 23);
+        btnRestablecer.setBounds(300, 443, 105, 23);
         getContentPane().add(btnRestablecer);
         btnRestablecer.addActionListener(this);
 
@@ -99,7 +99,9 @@ public class VentanaConsultarDonacion extends JInternalFrame implements ActionLi
             tabla.setModel(modeloDatos);
 
         } else if (e.getSource()== busqueda) {
-            if(busqueda.getSelectedItem().toString().equals("ID. Donativo")){
+            if(busqueda.getSelectedItem().toString().equals("ID. Donativo") ||busqueda.getSelectedItem().toString().equals("ID. Donante")
+            || busqueda.getSelectedItem().toString().equals("ID. Evento") || busqueda.getSelectedItem().toString().equals("Numero de pagos")
+            || busqueda.getSelectedItem().toString().equals("Tarjeta de credito") ){
                 cajaBusqueda.addKeyListener(new KeyListener() {
                     @Override
                     public void keyTyped(KeyEvent e) {
@@ -119,6 +121,28 @@ public class VentanaConsultarDonacion extends JInternalFrame implements ActionLi
                     public void keyReleased(KeyEvent e) {
                     }
                 });
+            } else if (busqueda.getSelectedItem().toString().equals("Corporacion") ||
+                    busqueda.getSelectedItem().toString().equals("Nombre conyuge")) {
+                cajaBusqueda.addKeyListener(new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        char car = e.getKeyChar();
+                        if (Character.isLetter(car)) {
+                            // Permitir solo letras
+                        } else {
+                            e.consume();
+                        }
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+                    }
+                });
+                
             }
         }else if (e.getSource()== btnRestablecer){
             restablecer(cajaBusqueda,busqueda);
@@ -161,7 +185,7 @@ public class VentanaConsultarDonacion extends JInternalFrame implements ActionLi
         if (criterio.equals("ID. Donativo")) {
             Integer.parseInt(donacion);
             consulta = "SELECT * FROM Donativo WHERE ID = '" + donacion + "';";
-        } else if (criterio.equals("ID. Donacion")) {
+        } else if (criterio.equals("ID. Donante")) {
             Integer.parseInt(donacion);
             consulta = "SELECT * FROM Donativo WHERE Donante_ID = '" + donacion + "';";
         } else if (criterio.equals("ID. Evento")) {
