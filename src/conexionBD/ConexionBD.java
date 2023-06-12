@@ -12,7 +12,7 @@ public class ConexionBD {
 
     static String URL;
 
-    public ConexionBD() {
+    private ConexionBD() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
