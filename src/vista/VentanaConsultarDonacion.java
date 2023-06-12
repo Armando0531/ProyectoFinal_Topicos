@@ -1,10 +1,13 @@
 package vista;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 
 
@@ -23,7 +26,7 @@ public class VentanaConsultarDonacion extends JInternalFrame implements ActionLi
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(755, 646);
         setVisible(true);
-        setTitle("Agregar Donador");
+        setTitle("Consultar Donacion");
         setResizable(false);
 
         lblConsultarDonativo = new JLabel("Consultar Donavito");
@@ -33,7 +36,13 @@ public class VentanaConsultarDonacion extends JInternalFrame implements ActionLi
         getContentPane().add(lblConsultarDonativo);
 
         lblLogoU = new JLabel("");
-        lblLogoU.setIcon(new ImageIcon("./imagenes/U_nuevo.png"));
+        String imagePath1="/imagenes/U_nuevo.png";
+        InputStream input1 =getClass().getResourceAsStream(imagePath1);
+        try {
+            lblLogoU.setIcon(new ImageIcon(ImageIO.read(input1)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         lblLogoU.setBounds(10, 11, 120, 112);
         getContentPane().add(lblLogoU);
 
@@ -54,8 +63,14 @@ public class VentanaConsultarDonacion extends JInternalFrame implements ActionLi
         btnRestablecer.addActionListener(this);
 
         btnSalir = new JButton("");
+        String imagePath2="/imagenes/btn_salir.png";
+        InputStream input2 =getClass().getResourceAsStream(imagePath2);
+        try {
+            btnSalir.setIcon(new ImageIcon(ImageIO.read(input2)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         btnSalir.setBackground(new Color(55, 92, 170));
-        btnSalir.setIcon(new ImageIcon("./imagenes/btn_salir.png"));
         btnSalir.setBounds(690, 11, 32, 32);
         getContentPane().add(btnSalir);
         btnSalir.addActionListener(this);
@@ -72,7 +87,13 @@ public class VentanaConsultarDonacion extends JInternalFrame implements ActionLi
         cajaBusqueda.setColumns(10);
 
         btnBuscar = new JButton("");
-        btnBuscar.setIcon(new ImageIcon("./imagenes/btn_buscar.png"));
+        String imagePath3="/imagenes/btn_buscar.png";
+        InputStream input3 =getClass().getResourceAsStream(imagePath3);
+        try {
+            btnBuscar.setIcon(new ImageIcon(ImageIO.read(input3)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         btnBuscar.setBounds(450, 105, 32, 32);
         getContentPane().add(btnBuscar);
         btnBuscar.addActionListener(this);

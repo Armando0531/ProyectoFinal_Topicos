@@ -2,9 +2,12 @@ package vista;
 
 import java.awt.event.*;
 import java.awt.Component;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.IOException;
+import java.io.InputStream;
 
 
 import controlador.DonacionDAO;
@@ -36,7 +39,13 @@ public class VentanaAgregarDonacion extends JInternalFrame implements ActionList
         getContentPane().add(lblNuevoDonativo);
 
         lblLogoU = new JLabel("");
-        lblLogoU.setIcon(new ImageIcon("./imagenes/U_nuevo.png"));
+        String imagePath3="/imagenes/U_nuevo.png";
+        InputStream input3 =getClass().getResourceAsStream(imagePath3);
+        try {
+            lblLogoU.setIcon(new ImageIcon(ImageIO.read(input3)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         lblLogoU.setBounds(20, -1, 120, 112);
         getContentPane().add(lblLogoU);
 
@@ -185,15 +194,27 @@ public class VentanaAgregarDonacion extends JInternalFrame implements ActionList
 
         btnSalir = new JButton("");
         btnSalir.setBackground(new Color(55, 92, 170));
-        btnSalir.setIcon(new ImageIcon("./imagenes/btn_salir.png"));
+        String imagePath1="/imagenes/btn_salir.png";
+        InputStream input1 =getClass().getResourceAsStream(imagePath1);
+        try {
+            btnSalir.setIcon(new ImageIcon(ImageIO.read(input1)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         btnSalir.setBounds(495, 11, 32, 32);
         getContentPane().add(btnSalir);
         btnSalir.addActionListener(this);
 
         btnAgregar = new JButton("");
         btnAgregar.setBounds(195, 512, 32, 32);
+        String imagePath2="/imagenes/Agregar_usuario.png";
+        InputStream input2 =getClass().getResourceAsStream(imagePath2);
+        try {
+            btnAgregar.setIcon(new ImageIcon(ImageIO.read(input2)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         getContentPane().add(btnAgregar);
-        btnAgregar.setIcon(new ImageIcon("./imagenes/Agregar_usuario.png"));
         btnAgregar.addActionListener(this);
 
         cajaCantidadEnviada.addKeyListener(new KeyAdapter() {

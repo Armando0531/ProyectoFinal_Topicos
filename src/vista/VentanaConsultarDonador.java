@@ -1,10 +1,13 @@
 package vista;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import vista.ResultSetTableModel;
 import conexionBD.ConexionBD;
@@ -33,7 +36,13 @@ public class VentanaConsultarDonador extends JInternalFrame implements ActionLis
         getContentPane().add(lblConsultar);
 
         lblLogoU = new JLabel("");
-        lblLogoU.setIcon(new ImageIcon("./imagenes/U_nuevo.png"));
+        String imagePath4="/imagenes/U_nuevo.png";
+        InputStream input4 =getClass().getResourceAsStream(imagePath4);
+        try {
+            lblLogoU.setIcon(new ImageIcon(ImageIO.read(input4)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         lblLogoU.setBounds(20, -1, 120, 112);
         getContentPane().add(lblLogoU);
 
@@ -68,14 +77,26 @@ public class VentanaConsultarDonador extends JInternalFrame implements ActionLis
         btnRestablecer.addActionListener(this);
 
         btnSalir = new JButton("");
+        String imagePath5="/imagenes/btn_salir.png";
+        InputStream input5 =getClass().getResourceAsStream(imagePath5);
+        try {
+            btnSalir.setIcon(new ImageIcon(ImageIO.read(input5)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         btnSalir.setBackground(new Color(55, 92, 170));
-        btnSalir.setIcon(new ImageIcon("./imagenes/btn_salir.png"));
         btnSalir.setBounds(495, 11, 32, 32);
         getContentPane().add(btnSalir);
         btnSalir.addActionListener(this);
 
         btnBuscar = new JButton("");
-        btnBuscar.setIcon(new ImageIcon("./imagenes/btn_buscar.png"));
+        String imagePath6="/imagenes/btn_buscar.png";
+        InputStream input6 =getClass().getResourceAsStream(imagePath6);
+        try {
+            btnBuscar.setIcon(new ImageIcon(ImageIO.read(input6)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         btnBuscar.setBounds(437, 124, 32, 32);
         getContentPane().add(btnBuscar);
         btnBuscar.addActionListener(this);

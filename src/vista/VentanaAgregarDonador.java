@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import controlador.DonadorDAO;
@@ -37,7 +40,13 @@ public class VentanaAgregarDonador extends JInternalFrame implements ActionListe
         getContentPane().add(lblNuevoUsuario);
 
         lblLogoU = new JLabel("");
-        lblLogoU.setIcon(new ImageIcon("./imagenes/logo_2.png"));
+        String imagePath="/imagenes/logo_2.png";
+        InputStream input =getClass().getResourceAsStream(imagePath);
+        try {
+            lblLogoU.setIcon(new ImageIcon(ImageIO.read(input)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         lblLogoU.setBounds(134, 42, 226, 213);
         getContentPane().add(lblLogoU);
 
@@ -118,15 +127,27 @@ public class VentanaAgregarDonador extends JInternalFrame implements ActionListe
 
         btnSalir = new JButton("");
         btnSalir.setBackground(new Color(55, 92, 170));
-        btnSalir.setIcon(new ImageIcon("./imagenes/btn_salir.png"));
+        String imagePath2="/imagenes/btn_salir.png";
+        InputStream input2 =getClass().getResourceAsStream(imagePath2);
+        try {
+            btnSalir.setIcon(new ImageIcon(ImageIO.read(input2)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         btnSalir.setBounds(452, 11, 32, 32);
         getContentPane().add(btnSalir);
         btnSalir.addActionListener(this);
 
         btnAgregar = new JButton("");
         btnAgregar.setBounds(190, 499, 32, 32);
+        String imagePath3="/imagenes/Agregar_usuario.png";
+        InputStream input3 =getClass().getResourceAsStream(imagePath3);
+        try {
+            btnAgregar.setIcon(new ImageIcon(ImageIO.read(input3)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         getContentPane().add(btnAgregar);
-        btnAgregar.setIcon(new ImageIcon("./imagenes/Agregar_usuario.png"));
         btnAgregar.addActionListener(this);
 
         cajaUsuario.addKeyListener(new KeyListener() {

@@ -2,6 +2,7 @@ package vista;
 import controlador.DonadorDAO;
 import modelo.Donador;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.awt.Component;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class VentanaEditarDonador extends JInternalFrame implements ActionListener {
     JLabel lblUsuario, lblLogoU, lblDireccion, lblCotegoria, lblEditarDonador, lblAnioGraduacion,
@@ -33,7 +36,13 @@ public class VentanaEditarDonador extends JInternalFrame implements ActionListen
         getContentPane().add(lblEditarDonador);
 
         lblLogoU = new JLabel("");
-        lblLogoU.setIcon(new ImageIcon("./imagenes/U_nuevo.png"));
+        String imagePath11="/imagenes/U_nuevo.png";
+        InputStream input11 =getClass().getResourceAsStream(imagePath11);
+        try {
+            lblLogoU.setIcon(new ImageIcon(ImageIO.read(input11)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         lblLogoU.setBounds(20, -1, 120, 112);
         getContentPane().add(lblLogoU);
 
@@ -112,14 +121,26 @@ public class VentanaEditarDonador extends JInternalFrame implements ActionListen
         btnRestablecer.addActionListener(this);
 
         btnSalir = new JButton("");
+        String imagePath12="/imagenes/btn_salir.png";
+        InputStream input12 =getClass().getResourceAsStream(imagePath12);
+        try {
+            btnSalir.setIcon(new ImageIcon(ImageIO.read(input12)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         btnSalir.setBackground(new Color(55, 92, 170));
-        btnSalir.setIcon(new ImageIcon("./imagenes/btn_salir.png"));
         btnSalir.setBounds(495, 11, 32, 32);
         getContentPane().add(btnSalir);
         btnSalir.addActionListener(this);
 
         btnEditar = new JButton("");
-        btnEditar.setIcon(new ImageIcon("./imagenes/btn_editar.png"));
+        String imagePath13="/imagenes/btn_editar.png";
+        InputStream input13 =getClass().getResourceAsStream(imagePath13);
+        try {
+            btnEditar.setIcon(new ImageIcon(ImageIO.read(input13)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         btnEditar.setBounds(186, 460, 32, 32);
         getContentPane().add(btnEditar);
         btnEditar.addActionListener(this);
@@ -136,7 +157,13 @@ public class VentanaEditarDonador extends JInternalFrame implements ActionListen
         cajaIdDonador.setColumns(10);
 
         btnBuscar = new JButton("");
-        btnBuscar.setIcon(new ImageIcon("./imagenes/btn_buscar.png"));
+        String imagePath14="/imagenes/btn_buscar.png";
+        InputStream input14 =getClass().getResourceAsStream(imagePath14);
+        try {
+            btnBuscar.setIcon(new ImageIcon(ImageIO.read(input14)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         btnBuscar.setBounds(389, 101, 32, 32);
         getContentPane().add(btnBuscar);
         btnBuscar.addActionListener(this);

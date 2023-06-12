@@ -2,6 +2,7 @@ package vista;
 import controlador.DonacionDAO;
 import modelo.Donacion;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class VentanaEliminarDonacion extends JInternalFrame implements ActionListener {
     JLabel lblLogoU,lblIdDonativo,lblIdDonante, lblIdEvento,lblFecha,lblCantidadEnviada,lblCantidadGarantizada,lblNumTarjeta,lblNomCorporacion,lblNomConyuge,lblDireccionCorp,lblNumeroPagos,lblEliminarDonativo;
@@ -31,7 +34,13 @@ public class VentanaEliminarDonacion extends JInternalFrame implements ActionLis
         getContentPane().add(lblEliminarDonativo);
 
         lblLogoU = new JLabel("");
-        lblLogoU.setIcon(new ImageIcon("./imagenes/U_nuevo.png"));
+        String imagePath14="/imagenes/U_nuevo.png";
+        InputStream input14 =getClass().getResourceAsStream(imagePath14);
+        try {
+            lblLogoU.setIcon(new ImageIcon(ImageIO.read(input14)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         lblLogoU.setBounds(10, 11, 120, 112);
         getContentPane().add(lblLogoU);
 
@@ -149,16 +158,28 @@ public class VentanaEliminarDonacion extends JInternalFrame implements ActionLis
         btnRestablecer.addActionListener(this);
 
         btnSalir = new JButton("");
+        String imagePath1="/imagenes/btn_salir.png";
+        InputStream input1 =getClass().getResourceAsStream(imagePath1);
+        try {
+            btnSalir.setIcon(new ImageIcon(ImageIO.read(input1)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         btnSalir.setBackground(new Color(55, 92, 170));
-        btnSalir.setIcon(new ImageIcon("./imagenes/btn_salir.png"));
         btnSalir.setBounds(540, 11, 32, 32);
         getContentPane().add(btnSalir);
         btnSalir.addActionListener(this);
 
         btnEliminar = new JButton("");
+        String imagePath2="/imagenes/btn_Eliminar_Dona.png";
+        InputStream input2 =getClass().getResourceAsStream(imagePath2);
+        try {
+            btnEliminar.setIcon(new ImageIcon(ImageIO.read(input2)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         btnEliminar.setBounds(221, 551, 32, 32);
         getContentPane().add(btnEliminar);
-        btnEliminar.setIcon(new ImageIcon("./imagenes/btn_Eliminar_Dona.png"));
         btnEliminar.addActionListener(this);
 
         lblIdDonativo = new JLabel("ID. Donativo:");
@@ -173,7 +194,13 @@ public class VentanaEliminarDonacion extends JInternalFrame implements ActionLis
         cajaIdDonativo.setColumns(10);
 
         btnBuscar = new JButton("");
-        btnBuscar.setIcon(new ImageIcon("./imagenes/btn_buscar.png"));
+        String imagePath3="/imagenes/btn_buscar.png";
+        InputStream input3 =getClass().getResourceAsStream(imagePath3);
+        try {
+            btnBuscar.setIcon(new ImageIcon(ImageIO.read(input3)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         btnBuscar.setBounds(440, 99, 32, 32);
         getContentPane().add(btnBuscar);
         btnBuscar.addActionListener(this);

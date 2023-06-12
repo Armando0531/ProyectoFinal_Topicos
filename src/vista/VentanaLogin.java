@@ -1,5 +1,6 @@
 package vista;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
@@ -7,6 +8,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -38,7 +41,13 @@ public class VentanaLogin extends JFrame {
         contentPane.add(lblTitulo);
 
         lblLogo = new JLabel("");
-        lblLogo.setIcon(new ImageIcon("./imagenes/logo_2.png"));
+        String imagePath="/imagenes/logo_2.png";
+        InputStream input =getClass().getResourceAsStream(imagePath);
+        try {
+            lblLogo.setIcon(new ImageIcon(ImageIO.read(input)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         lblLogo.setBounds(57, 79, 209, 190);
         contentPane.add(lblLogo);
 
